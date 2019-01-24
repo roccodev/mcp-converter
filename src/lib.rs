@@ -1,5 +1,7 @@
 /* Extern crates */
 extern crate regex;
+extern crate libc;
 
 /* Link libraries */
-mod parser;
+pub mod parser;
+pub mod ffi;
