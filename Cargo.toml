@@ -10,3 +10,7 @@ libc = "0.2.48"
 [lib]
 name = "mcpconverter"
 crate-type = ["dylib"]
+
+[[bin]]
+name = "main"
+doc = false
