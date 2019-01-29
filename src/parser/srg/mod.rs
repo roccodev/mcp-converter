@@ -1,6 +1,8 @@
 use regex::Regex;
 use std::fs;
 
+static SRG_FILE: &'static str = include_str!("../../../resources/srg.srg");
+
 const CLASS_REGEX: &'static str = r"CL: (.*) (.*)"; /* [Notchian name] [MCP name] */
 const FIELD_REGEX: &'static str = r"FD: (.*) (.*)"; /* [Notchian class/Notchian name] [MCP class/MCP name] */
 
@@ -24,7 +26,7 @@ pub struct FieldDef {
 pub fn find_class(mcp_name: &str) -> Option<ClassDef> {
     let class_reg = Regex::new(CLASS_REGEX).unwrap();
 
-    let contents = fs::read_to_string("resources/srg.srg").unwrap();
+    let contents = SRG_FILE.to_string();
     let iter: Vec<&str> = contents.split("\n").collect();
 
     for line in iter {
@@ -47,7 +49,7 @@ pub fn find_class(mcp_name: &str) -> Option<ClassDef> {
 pub fn find_class_notchian(notchian_name: &str) -> Option<ClassDef> {
     let class_reg = Regex::new(CLASS_REGEX).unwrap();
 
-    let contents = fs::read_to_string("resources/srg.srg").unwrap();
+    let contents = SRG_FILE.to_string();
     let iter: Vec<&str> = contents.split("\n").collect();
 
     for line in iter {
@@ -70,7 +72,7 @@ pub fn find_class_notchian(notchian_name: &str) -> Option<ClassDef> {
 pub fn find_field(mcp_name: &str, class: ClassDef) -> Option<FieldDef> {
     let field_reg = Regex::new(FIELD_REGEX).unwrap();
 
-    let contents = fs::read_to_string("resources/srg.srg").unwrap();
+    let contents = SRG_FILE.to_string();
     let iter: Vec<&str> = contents.split("\n").collect();
 
     let name = format!("{}/{}", class.mcp_name, mcp_name);
@@ -98,7 +100,7 @@ pub fn find_field(mcp_name: &str, class: ClassDef) -> Option<FieldDef> {
 pub fn find_field_notchian(notchian_name: &str, class: ClassDef) -> Option<FieldDef> {
     let field_reg = Regex::new(FIELD_REGEX).unwrap();
 
-    let contents = fs::read_to_string("resources/srg.srg").unwrap();
+    let contents = SRG_FILE.to_string();
     let iter: Vec<&str> = contents.split("\n").collect();
 
     let name = format!("{}/{}", class.notchian_name, notchian_name);
