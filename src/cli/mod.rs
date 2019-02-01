@@ -1,3 +1,5 @@
+mod commands;
+
 pub fn parse_args(args: &Vec<String>) {
 
     if args.len() < 2 {
@@ -34,7 +36,5 @@ pub fn parse_args(args: &Vec<String>) {
     let from = &chars[1];
     let to = &chars[2];
 
-
-
-
+    commands::parse_command(element_type, from, to, &args[2]);
 }
